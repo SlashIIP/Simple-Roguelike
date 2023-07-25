@@ -50,7 +50,7 @@ public class LevelManager : MonoBehaviour
 
     public void PauseUnpause()
     {
-        if(!isPaused)
+        if (!isPaused)
         {
             UIController.instance.pauseMenu.SetActive(true);
 

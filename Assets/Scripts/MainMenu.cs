@@ -10,9 +10,16 @@ public class MainMenu : MonoBehaviour
     public string levelToLoad;
     public GameObject recordsPanel;
     public Text playerStats;
+    private int score;
 
     void Start()
     {
+        score = CharacterTracker.instance.currentLevel;
+        if (score > PlayerPrefs.GetInt("HighScore", 0))
+        {
+            PlayerPrefs.SetInt("HighScore", score);
+            PlayerPrefs.Save();
+        }
         recordsPanel.SetActive(false);
         UpdatePlayerStats();
     }
@@ -26,7 +33,7 @@ public class MainMenu : MonoBehaviour
     {
         CharacterTracker.instance.currentLevel = 1;
         SceneManager.LoadScene(levelToLoad);
-        
+
     }
 
     public void ExitGame()
@@ -46,5 +53,6 @@ public class MainMenu : MonoBehaviour
 
     public void UpdatePlayerStats()
     {
-        playerStats.text = "Максимальный уровень: " + CharacterTracker.instance.currentLevel;}
+        playerStats.text = "Максимальный уровень: " + PlayerPrefs.GetInt("HighScore", 0);
     }
+}
